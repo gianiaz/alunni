@@ -4,6 +4,43 @@ $(function() {
 
     switch(section) {
 
+        case 'new':
+        case 'edit':
+
+            $('.row-vote input[type="number"]').on('change', function() {
+                $('.btn-submit-mail').removeClass('disabled');
+
+            });
+
+            $('#addVote').on('click', function(e) {
+                e.preventDefault();
+                var markup = $('.collection').data('prototype');
+                $('.btn-submit-mail').removeClass('disabled');
+                var index = $('.row-vote').length;
+                var canAdd = true;
+                $('.row-vote').each(function() {
+                    if($.trim($(this).find('input').val()) == '') {
+                        canAdd = false;
+                    }
+                });
+                if(canAdd) {
+                    markup = markup.replace(/__name__/g, index);
+                    $(markup).insertBefore($(this));
+                } else {
+                    var opts = {
+                        'type': 'danger',
+                        'titolo': _('Attenzione'),
+                        'content': _('Compila il voto precendete prima di aggiungerne un altro'),
+                        'OK': 'Ok',
+                        'callback': null
+                    };
+                    HandleBarHelper.alert(opts);
+
+                }
+
+            });
+            break;
+
         case null:
 
             /** Datatable della pagina di elenco */
@@ -39,6 +76,15 @@ $(function() {
                 'className': 'dt2',
                 searchable: true,
                 data: 'email'
+            };
+
+            cols.push(col);
+
+            col = {
+                'title': _('Media'),
+                'className': 'dt2',
+                searchable: true,
+                data: 'avg'
             };
 
             cols.push(col);

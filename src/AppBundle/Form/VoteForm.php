@@ -8,6 +8,7 @@ namespace AppBundle\Form;
 use AppBundle\Entity\Vote;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\RangeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -17,7 +18,11 @@ class VoteForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
 
-        $builder->add('vote', NumberType::class, ['label' => 'students.labels.vote']);
+        $builder->add(
+            'vote',
+            NumberType::class,
+            ['label' => 'students.labels.vote', 'attr' => ['min' => 0, 'max' => 10, 'step' => 1]]
+        );
 
     }
 

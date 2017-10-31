@@ -9,8 +9,10 @@ use AppBundle\Entity\Student;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\SubmitButton;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class StudentForm extends AbstractType
@@ -22,7 +24,27 @@ class StudentForm extends AbstractType
         $builder->add('name', TextType::class, ['label' => 'students.labels.name']);
         $builder->add('surname', TextType::class, ['label' => 'students.labels.surname']);
         $builder->add('email', EmailType::class, ['label' => 'students.labels.email']);
-        $builder->add('votes', CollectionType::class, ['entry_type' => VoteForm::class, 'allow_add' => true]);
+        $builder->add(
+            'votes',
+            CollectionType::class,
+            ['entry_type' => VoteForm::class, 'allow_add' => true, 'label' => false, 'by_reference' => false]
+        );
+        $builder->add(
+            'submit',
+            SubmitType::class,
+            [
+                'attr' => ['class' => 'btn btn-success btn-submit-mail disabled'],
+                'label' => 'default.labels.salva',
+            ]
+        );
+        $builder->add(
+            'submitmail',
+            SubmitType::class,
+            [
+                'attr' => ['class' => 'btn btn-success btn-submit-mail disabled'],
+                'label' => 'default.labels.salva_e_invia',
+            ]
+        );
 
     }
 

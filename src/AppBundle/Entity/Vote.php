@@ -59,6 +59,7 @@ class Vote
      */
     public function setStudent($student)
     {
+
         $this->student = $student;
     }
 

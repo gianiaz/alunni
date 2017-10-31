@@ -114,7 +114,15 @@ class StudentController extends Controller
             $em->persist($Student);
             $em->flush();
 
+            $nextAction = $form->get('submitmail')->isClicked()
+                ? 'sendmail'
+                : 'success';
+
             $elemento = $Student->getName();
+
+            if ($nextAction == 'sendmail') {
+                $this->studentService->sendMail();
+            }
 
             if (!$new) {
                 $this->addFlash(

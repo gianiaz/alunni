@@ -47,7 +47,8 @@ class Student
     private $email;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Vote", mappedBy="student")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Vote", mappedBy="student", cascade={"persist", "remove"})
+     * @Assert\Valid()
      */
     private $votes;
 
@@ -119,6 +120,8 @@ class Student
 
     public function addVote(Vote $vote)
     {
+
+        $vote->setStudent($this);
 
         $this->votes->add($vote);
 

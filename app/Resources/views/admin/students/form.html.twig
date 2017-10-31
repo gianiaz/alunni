@@ -1,3 +1,9 @@
+{% macro information_prototype(vote) %}
+    <div class="row row-vote">
+        {{ form_row(vote.vote, {'type' : 'number'}) }}
+    </div>
+{% endmacro %}
+
 {{ form_start(form) }}
 
 {% if not form.vars.valid %}
@@ -28,10 +34,19 @@
             <div class="clearfix"></div>
         </div>
         <div class="x_content">
-            {{ form_row(form.votes) }}
-            <button class="btn btn-primary btn-block"><i class="fa fa-plus"></i> {% trans %}
-                students.labels.add_vote {% endtrans %}
-            </button>
+            <div class="votes">
+
+
+            </div>
+
+            <div class="collection" data-prototype="{{ _self.information_prototype(form.votes.vars.prototype)|e }}">
+                {% for vote in form.votes %}
+                    {{ _self.information_prototype(vote) }}
+                {% endfor %}
+                <button class="btn btn-primary btn-block" id="addVote"><i class="fa fa-plus"></i> {% trans %}
+                    students.labels.add_vote {% endtrans %}
+                </button>
+            </div>
         </div>
     </div>
 </div>
@@ -40,6 +55,9 @@
 
     <button class="btn btn-success btn-main-submit" formnovalidate><i class="fa fa-save"></i> {% trans %}
         default.labels.salva {% endtrans %}</button>
+
+    <button class="btn btn-success btn-submit-mail disabled" formnovalidate><i class="fa fa-save"></i> {% trans %}
+        default.labels.salva_e_invia_mail {% endtrans %} <i class="fa fa-envelope"></i></button>
 
     <a href="{{ path('students') }}" class="btn btn-danger"><i class="fa fa-close"></i> {% trans %}
         default.labels.chiudi {% endtrans %}

@@ -13,6 +13,8 @@ default:
         obbligatori: I campi contrassegnati con * sono obbligatori
         modifica: Modifica
         eliminato: eliminato
+        modificato: modificato
+        salva_e_invia: Salva e invia notifica
 
 dashboard:
     labels:
@@ -23,3 +25,7 @@ students:
         name: Nome
         surname: Cognome
         email: Email
+        vote: Voto
+        voti: Elenco dei voti
+        add_vote: Aggiungi voto
+        dati_alunno: Dati dell'alunno
