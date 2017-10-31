@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico?a=b"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Alunni v.1.00</title>
+
+    {% block stylesheets %}
+        <link href="{{ asset('node_modules/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('node_modules/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('bundles/app/admin/css/custom.css') }}" rel="stylesheet"/>
+
+    {% endblock stylesheets %}
+
+
+</head>
+
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+
+
+        {% include 'admin/includes/sidebar.html.twig' %}
+        {% include 'admin/includes/topnav.html.twig' %}
+        <div class="right_col" role="main">
+            <div class="">
+                {% block top_content_header %}
+                    <div class="page-title">
+                        <div class="title_left">
+                            <h3>{% block page_title %}{% endblock page_title %}</h3>
+                        </div>
+
+                        <div class="title_right text-right">
+                            {% block pulsantiera %}{% endblock %}
+                        </div>
+                    </div>
+                {% endblock top_content_header %}
+
+                <div class="clearfix"></div>
+
+                {% for msg in app.session.flashBag.get('success') %}
+                    <div class="alert alert-success"><i class="fa fa-check"></i> {{ msg }}</div>
+                {% endfor %}
+                {% for msg in app.session.flashBag.get('error') %}
+                    <div class="alert alert-danger"><i class="fa fa-close"></i> {{ msg | raw }}</div>
+                {% endfor %}
+
+                {% block page_content %}{% endblock %}
+
+
+            </div>
+        </div>
+        {% include 'admin/includes/footer.html.twig' %}
+
+
+    </div>
+</div>
+
+{% block javascripts %}
+    <script src="{{ asset('node_modules/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ asset('node_modules/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('node_modules/fastclick/lib/fastclick.js') }}"></script>
+    <script src="{{ asset('node_modules/nprogress/nprogress.js') }}"></script>
+    <script src="{{ asset('node_modules/handlebars/dist/handlebars.min.js') }}"></script>
+    <script src="{{ asset('bundles/app/admin/js/admin.js') }}"></script>
+    <script src="{{ asset('bundles/app/admin/js/utils.js') }}"></script>
+{% endblock javascripts %}
+
+{% block modals %}
+
+    <div id="modalAlert" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title text-warning" id="myModalLabel">Cancellazione</h4>
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Annulla</button>
+                    <button type="button" class="btn btn-warning btn-confirm">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock modals %}
+
+{% block handlebars %}
+    {% verbatim %}
+
+    <script type="text/handlebars" id="alertDialogTemplate">
+
+    <div id="alertDialog" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title text-{{type}}">{{titolo}}</h4>
+                </div>
+                <div class="modal-body">
+                {{{content}}}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-{{type}} btn-confirm">{{OK}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </script>
+    {% endverbatim %}
+
+    {% verbatim %}
+
+    <script type="text/handlebars" id="confirmDialogTemplate">
+
+    <div id="alertDialog" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog{{large}}">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title text-{{type}}">{{titolo}}</h4>
+                </div>
+                <div class="modal-body">
+                {{{content}}}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger btn-cancel">{{CANCEL}}</button>
+                    <button type="button" class="btn btn-success btn-confirm">{{OK}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </script>
+    {% endverbatim %}
+{% endblock %}
+
+{% block lockScreen %}
+    <script type="text/x-handlebars-template" id="lockScreenTemplate">
+        <div id="overlay"
+             style="position: fixed;top: 0;left: 0;height: 100%;width: 100%;z-index: 10000;background-color: rgba(0,0,0,0.5);">
+            <div id="message"
+                 style="width:30em;height:5em;line-height:5em; position:fixed; top:50%; left:50%;margin-top:-2.5em;margin-left:-15em; background-color:#D3D92F; border-radius:0.5em;text-align:center; z-index:10001;color:#5E5E5D;font-weight:bold;font-size:1.2em;">
+                {% verbatim %}<i class="fa {{icon}}"></i> {{message}}{% endverbatim %}
+            </div>
+        </div>
+    </script>
+{% endblock %}
+<script src="{{ asset('bundles/app/admin/js/custom.js') }}"></script>
+</body>
+</html>

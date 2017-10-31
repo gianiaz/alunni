@@ -1,0 +1,25 @@
+default:
+    labels:
+        welcome: Benvenuto
+        menu: Menu
+        scrivania: Scrivania
+        amministrazione: Amministrazione
+        alunni: Alunni
+        about: About
+        elenco: Elenco elementi
+        nuovo: Nuovo
+        salva: Salva
+        chiudi: Chiudi
+        obbligatori: I campi contrassegnati con * sono obbligatori
+        modifica: Modifica
+        eliminato: eliminato
+
+dashboard:
+    labels:
+        dati_contatto: Dati contatto
+students:
+    labels:
+        title: Alunni
+        name: Nome
+        surname: Cognome
+        email: Email

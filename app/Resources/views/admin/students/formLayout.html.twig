@@ -1,0 +1,10 @@
+{% extends "admin/admin.html.twig" %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/app/admin/js/students.js') }}"></script>
+{% endblock %}
+
+{% block page_content %}
+    {{ include(':admin/students:form.html.twig') }}
+{% endblock %}

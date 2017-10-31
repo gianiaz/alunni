@@ -1,0 +1,21 @@
+{
+  "name": "alunni",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "datatables": "^1.10.13",
+    "datatables-bootstrap": "0.0.1",
+    "fastclick": "^1.0.6",
+    "font-awesome": "^4.7.0",
+    "handlebars": "^4.0.11",
+    "jquery": "^3.2.1",
+    "nprogress": "^0.2.0"
+  }
+}

@@ -1,0 +1,51 @@
+{{ form_start(form) }}
+
+{% if not form.vars.valid %}
+    <div class="alert alert-danger">
+        {{ errors | raw }}
+    </div>
+{% endif %}
+
+<div class="col-md-12 col-xs-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>{% trans %} students.labels.dati_alunno {% endtrans %}</h2>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+
+            {{ form_row(form.name) }}
+            {{ form_row(form.surname) }}
+            {{ form_row(form.email) }}
+        </div>
+    </div>
+</div>
+
+<div class="col-md-12 col-xs-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>{% trans %} students.labels.voti {% endtrans %}</h2>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            {{ form_row(form.votes) }}
+            <button class="btn btn-primary btn-block"><i class="fa fa-plus"></i> {% trans %}
+                students.labels.add_vote {% endtrans %}
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3 col-sm-offset-3">
+
+    <button class="btn btn-success btn-main-submit" formnovalidate><i class="fa fa-save"></i> {% trans %}
+        default.labels.salva {% endtrans %}</button>
+
+    <a href="{{ path('students') }}" class="btn btn-danger"><i class="fa fa-close"></i> {% trans %}
+        default.labels.chiudi {% endtrans %}
+    </a>
+</div>
+
+
+{{ form_end(form) }}
+
