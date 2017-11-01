@@ -8,6 +8,10 @@ namespace AppBundle\Service;
 use AppBundle\Entity\Student;
 use AppBundle\Entity\Vote;
 use Doctrine\ORM\EntityManager;
+use Symfony\Bridge\Twig\TwigEngine;
+use Symfony\Component\HttpKernel\Kernel;
+use Symfony\Component\HttpKernel\KernelInterface;
+use Twig\Template;
 
 class StudentService
 {
@@ -15,14 +19,33 @@ class StudentService
      * @var EntityManager
      */
     private $entityManager;
+    /**
+     * @var TwigEngine
+     */
+    private $twigEngine;
+    /**
+     * @var Kernel
+     */
+    private $kernel;
+    /**
+     * @var \Swift_Mailer
+     */
+    private $swiftMailer;
 
 
     /**
      * StudentService constructor.
      */
-    public function __construct(EntityManager $entityManager)
-    {
+    public function __construct(
+        EntityManager $entityManager,
+        TwigEngine $twigEngine,
+        KernelInterface $kernel,
+        \Swift_Mailer $swiftMailer
+    ) {
         $this->entityManager = $entityManager;
+        $this->twigEngine = $twigEngine;
+        $this->kernel = $kernel;
+        $this->swiftMailer = $swiftMailer;
     }
 
     public function getList()
@@ -71,10 +94,36 @@ class StudentService
         return round(array_sum($votes) / count($votes), 2);
     }
 
-    public function sendMail()
+    public function sendMail(Student $student)
     {
-        dump('mail');
-        die;
+
+        $subject = 'Variazione voti';
+        $text = '';
+
+        $message = \Swift_Message::newInstance()
+            ->setSubject($subject)
+            ->setSender('info@alunni.net', 'Giovanni Battista Lenoci')
+            ->setTo($student->getEmail());
+
+        $data = [
+            'logo' => $message->embed(
+                \Swift_Image::fromPath($this->kernel->getProjectDir().'/web/media/99gen_dots.jpg')
+            ),
+            'subject' => $subject,
+            'name' => $student->getName(),
+            'surname' => $student->getSurname(),
+            'text' => $text,
+        ];
+
+
+        $html = $this->twigEngine->render(
+            'email.html.twig',
+            $data
+        );
+
+        $message->setBody($html, 'text/html');
+
+        $this->swiftMailer->send($message);
     }
 
 

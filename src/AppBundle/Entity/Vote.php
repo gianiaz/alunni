@@ -32,7 +32,7 @@ class Vote
     private $student;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="decimal", scale=1, precision=3)
      * @Assert\NotBlank()
      * @Assert\Range(min=0, max=10)
      */

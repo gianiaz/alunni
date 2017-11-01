@@ -33,7 +33,7 @@ class StudentForm extends AbstractType
             'submit',
             SubmitType::class,
             [
-                'attr' => ['class' => 'btn btn-success btn-submit-mail disabled'],
+                'attr' => ['class' => 'btn btn-success btn-submit-mail'],
                 'label' => 'default.labels.salva',
             ]
         );

@@ -121,7 +121,7 @@ class StudentController extends Controller
             $elemento = $Student->getName();
 
             if ($nextAction == 'sendmail') {
-                $this->studentService->sendMail();
+                $this->studentService->sendMail($Student);
             }
 
             if (!$new) {

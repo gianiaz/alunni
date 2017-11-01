@@ -1,0 +1,27 @@
+AppBundle\Entity\Student:
+  student_1:
+    name: Giovanni
+    surname: Lenoci
+    email: gianiaz@gmail.com
+  student_2:
+    name: <firstname()>
+    surname: <lastname()>
+    email: <email()>
+  student_3:
+    name: <firstname()>
+    surname: <lastname()>
+    email: <email()>
+
+AppBundle\Entity\Vote:
+  vote_1:
+    student: "@student_1"
+    vote: 6
+  vote_2:
+    student: "@student_1"
+    vote: 7
+  vote_{{3..4}}:
+    student: "@student_2"
+    vote: <numberBetween(0,10)>
+  vote_{{5..6}}:
+    student: "@student_3"
+    vote: <numberBetween(0,10)>
