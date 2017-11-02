@@ -28,13 +28,13 @@
                     <li><a href="{{ path('dashboard') }}"><i class="fa fa-home"></i> {% trans %}
                             default.labels.scrivania {% endtrans %}</a></li>
 
-                    <li>
+                    <li id="adminMainMenu">
                         <a>
                             <i class="fa fa-cogs"></i> {% trans %}default.labels.amministrazione {% endtrans %}
                             <span class="fa fa-chevron-down"></span>
                         </a>
-                        <ul class="nav child_menu" style="display: none;">
-                            <li><a href="{{ path('students') }}">{% trans %}
+                        <ul class="nav child_menu" style="display: block">
+                            <li><a id="studentsMenu" href="{{ path('students') }}">{% trans %}
                                     default.labels.alunni {% endtrans %}</a></li>
                         </ul>
                     </li>
