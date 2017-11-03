@@ -42,7 +42,7 @@
     "hautelook/alice-bundle": "^2.0@beta",
     "nelmio/alice": "^3.0@beta",
     "sensio/generator-bundle": "^3.0",
-    "symfony/phpunit-bridge": "^3.0",
+    "symfony/phpunit-bridge": "^3.3",
     "theofidry/alice-data-fixtures": "^1.0@rc"
   },
   "scripts": {
@@ -55,10 +55,12 @@
       "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
     ],
     "post-install-cmd": [
-      "@symfony-scripts"
+      "@symfony-scripts",
+      "$(which npm) --prefix web install web"
     ],
     "post-update-cmd": [
-      "@symfony-scripts"
+      "@symfony-scripts",
+      "$(which npm) --prefix web install web"
     ]
   },
   "config": {

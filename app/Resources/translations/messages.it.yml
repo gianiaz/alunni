@@ -15,6 +15,7 @@ default:
         eliminato: eliminato
         modificato: modificato
         salva_e_invia: Salva e invia notifica
+        creato: creato
 
 dashboard:
     labels:

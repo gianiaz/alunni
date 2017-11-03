@@ -30,6 +30,7 @@ class Student
     /**
      * @ORM\Column(type="string")
      * @Assert\NotBlank()
+     * @Assert\Length(min=3)
      */
     private $name;
 
