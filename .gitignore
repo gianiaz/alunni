@@ -17,5 +17,4 @@
 /web/bundles/
 /web/node_modules/
 /TODO
-/app/config/config_dev.yml
 .idea/
